@@ -1,0 +1,50 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Add Animal</title>
+</head>
+<body>
+
+<!-- This form allows a user to create an animal object, 
+	and sends it through the inputAnimal method in the controller,
+	where it is saved using the repo, then into the local DB. -->
+
+<form th:object="${animal}" th:action="@{/inputAnimal}" th:method="post">
+
+	<table>
+    	<tr>
+        	<td>Name:</td>
+        	<td><input type="text" th:name="name" /></td>
+        	<td style="color:red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</td>
+    	</tr>
+                
+    	<tr>
+        	<td>Species:</td>
+        	<td><input type="text" th:name="species" /></td>
+        	<td style="color:red" th:if="${#fields.hasErrors('species')}" th:errors="*{species}">Species Error</td>
+        </tr>
+                
+        <tr><td>Sex:</td></tr>
+		<tr><td><input type="radio" th:name="sex" value='M'><label for="male">Male</label></td></tr>        
+        <tr><td><input type="radio" th:name="sex" value='F'><label for="female">Female</label></td></tr>
+        <tr><td><input type="radio" th:name="sex" value='X' checked><label for="unknown">Unknown</label></td></tr>
+               
+     	<tr>
+        	<td>Size(lbs):</td>
+        	<td><input type="number" th:name="size" step="0.01" th:min="0.01" th:value="0.1"/></td>
+       		<td style="color:red" th:if="${#fields.hasErrors('size')}" th:errors="*{size}">Size Error</td>
+        </tr>
+                
+    	<tr>
+        	<td>Color:</td>
+        	<td><input type="text" th:name="color" /></td>
+       		<td style="color:red" th:if="${#fields.hasErrors('color')}" th:errors="*{color}">Color Error</td>
+        </tr>
+           
+        <tr><td><button type="submit">Submit</button></td></tr>
+	</table>
+
+</form>
+<a href="viewAll">View all Animals</a>
+</body>
+</html>
